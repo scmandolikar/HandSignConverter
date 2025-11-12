@@ -107,8 +107,3 @@ HandSignConverter/
 ├── web_app.py                # Flask server script for the web app
 ├── README.md                 # Project documentation
 └── requirements.txt          # List of Python dependencies
-```
-├── train_model.py            # Script to train the model
-├── web_app.py                # Flask server script for the web app
-├── README.md                 # Project documentation
-└── requirements.txt          # List of Python dependencies
