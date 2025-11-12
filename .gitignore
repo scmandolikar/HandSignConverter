@@ -1,0 +1,15 @@
+# Virtual Environment
+venv/
+*.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Data & Models (if they are too large or private)
+# If model.pkl is too large for GitHub (over 100MB), you'll need Git LFS
+# model.pkl
+# data/hand_landmarks.csv

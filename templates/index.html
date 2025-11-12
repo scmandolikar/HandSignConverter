@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASL Web Converter</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #242424; 
+            color: white; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+            overflow: hidden;
+        }
+        #container { 
+            text-align: center; 
+            padding: 20px;
+        }
+        video { 
+            border: 5px solid #1F6AA5; 
+            border-radius: 10px; 
+            transform: scaleX(-1); /* Flips video for a natural mirror effect */
+            background-color: #000;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #EAEAEA;
+        }
+        #prediction-box {
+            font-size: 5em; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            color: #2ECC71; /* A bright green for high visibility */
+            height: 1.5em; /* Prevents layout shift */
+            min-width: 1.5em; /* Ensures box is visible even when empty */
+            display: inline-block;
+            transition: color 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>ASL Web Converter</h1>
+        <video id="video" width="640" height="480" autoplay muted playsinline></video>
+        <div id="prediction-box">...</div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const predictionBox = document.getElementById('prediction-box');
+        
+        // 1. Access the user's webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                console.error("Error accessing webcam: ", err);
+                alert("Could not access webcam. Please allow camera permissions and try again.");
+            });
+
+        // 2. Send frames to the backend for prediction every 500ms
+        setInterval(async () => {
+            if (video.readyState < 2) { // Check if video is ready to capture
+                return;
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            // Flip the canvas context horizontally to match the mirrored video feed
+            context.translate(canvas.width, 0);
+            context.scale(-1, 1);
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Get the image data from the canvas
+            const dataUrl = canvas.toDataURL('image/jpeg');
+
+            try {
+                // 3. Send the image data to our Flask server
+                const response = await fetch('http://127.0.0.1:5000/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image: dataUrl })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                // 4. Receive the prediction and update the display
+                const result = await response.json();
+                if (result.prediction) {
+                    predictionBox.textContent = result.prediction;
+                } else {
+                    // Don't clear the prediction immediately, makes it feel more stable
+                }
+            } catch (error) {
+                console.error("Error during prediction:", error);
+            }
+        }, 500); // Interval set to 500ms (2 predictions per second)
+    </script>
+</body>
+</html>
