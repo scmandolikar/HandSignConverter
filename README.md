@@ -93,6 +93,7 @@ This project already includes a pre-trained `model.pkl` file. However, if you wa
 
 ## 📂 Project Structure
 
+```
 HandSignConverter/
 ├── data/                     # (Optional) Holds the generated CSV data
 ├── icons/                    # Icons for the GUI buttons
@@ -102,6 +103,11 @@ HandSignConverter/
 ├── app.py                    # Main desktop application script
 ├── create_dataset.py         # Script to collect training data
 ├── model.pkl                 # The pre-trained machine learning model
+├── train_model.py            # Script to train the model
+├── web_app.py                # Flask server script for the web app
+├── README.md                 # Project documentation
+└── requirements.txt          # List of Python dependencies
+```
 ├── train_model.py            # Script to train the model
 ├── web_app.py                # Flask server script for the web app
 ├── README.md                 # Project documentation
