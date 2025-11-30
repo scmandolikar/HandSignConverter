@@ -107,3 +107,94 @@ HandSignConverter/
 ├── web_app.py                # Flask server script for the web app
 ├── README.md                 # Project documentation
 └── requirements.txt          # List of Python dependencies
+
+## 📸 Demo & Screenshots
+
+*Coming soon - Application screenshots and demo video will be added*
+
+## 🎯 Use Cases
+
+- **Accessibility** - Help hearing-impaired individuals communicate
+- **ASL Learning** - Interactive tool for learning American Sign Language
+- **Healthcare** - Enable communication between deaf patients and medical staff
+- **Education** - Classroom aid for special education
+- **Customer Service** - Accessibility tool for service counters
+- **Research** - Gesture recognition and ML model development
+
+## 💡 How It Works
+
+1. **Video Capture**: Uses OpenCV to capture real-time webcam feed
+2. **Hand Detection**: MediaPipe detects and tracks 21 hand landmarks
+3. **Feature Extraction**: Extracts coordinate data from detected landmarks
+4. **Classification**: Random Forest model classifies the gesture (A-Z)
+5. **Output**: Displays recognized letter and speaks via text-to-speech
+6. **Sentence Building**: Users can build words and sentences letter by letter
+
+## 🚀 Features Roadmap
+
+- [ ] Support for ASL words and phrases (not just letters)
+- [ ] Multi-language sign language support (BSL, ISL, etc.)
+- [ ] Mobile app version (iOS/Android)
+- [ ] Real-time sentence prediction using NLP
+- [ ] Hand gesture speed optimization
+- [ ] Export conversation history
+- [ ] Integration with video conferencing platforms
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Areas for Contribution
+- Improve model accuracy with more training data
+- Add support for new sign languages
+- Enhance GUI with themes and customization
+- Optimize real-time performance
+- Write comprehensive tests
+
+## 🐛 Known Issues
+
+- Model accuracy depends on lighting conditions (works best in well-lit environments)
+- Requires clear background for optimal hand detection
+- Real-time processing may lag on older hardware
+- Currently supports only 26 ASL alphabet letters
+
+## 📐 Model Information
+
+- **Algorithm**: Random Forest Classifier
+- **Training Data**: 26 ASL alphabet letters (A-Z)
+- **Features**: 21 hand landmark coordinates (x, y, z)
+- **Accuracy**: ~95% on test dataset
+- **Model File**: `model.pkl` (included)
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 📚 Resources
+
+- [ASL Alphabet Chart](https://www.startasl.com/asl-alphabet/)
+- [MediaPipe Hands Documentation](https://google.github.io/mediapipe/solutions/hands.html)
+- [American Sign Language (ASL)](https://en.wikipedia.org/wiki/American_Sign_Language)
+
+## ⭐ Star History
+
+If you find this project useful for learning or research, please consider giving it a star! ⭐
+
+## 📧 Contact & Support
+
+**Sakshath Mandolikar**
+- Email: scmandolikar@gmail.com
+- GitHub: [@scmandolikar](https://github.com/scmandolikar)
+- LinkedIn: [Sakshath Mandolikar](https://www.linkedin.com/in/sakshath-mandolikar-8432b8396)
+
+For bug reports and feature requests, please use the [GitHub Issues](https://github.com/scmandolikar/HandSignConverter/issues) page.
+
+---
+
+**Built with ❤️ by Sakshath Mandolikar** | TY BScIT Student | Academic ML Project
